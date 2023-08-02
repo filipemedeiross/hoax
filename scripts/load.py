@@ -1,19 +1,13 @@
 import os
 import sys
-import pandas as pd
+from constants import cols
+from pandas import read_csv
 
 
 def load_data(url, filepath):
-    cols = [
-        'institiuicoes_atuando_local', 'iniciados_outras_providencias', 'origem',
-        'plano_emergencia_acionado', 'informacao_responsavel', 'ocorrencia_oleo',
-        'informacao_geografica', 'tipos_fontes_informacoes', 'des_ocorrencia',
-        'uf', 'tipos_danos_identificados', 'periodo_ocorrencia', 'validado'
-    ]
-
     try:
         print('Loading the files from the url...')
-        notifications = pd.read_csv(url, low_memory=False, usecols=cols)[cols]
+        notifications = read_csv(url, low_memory=False, usecols=cols)[cols]
     except:
         sys.stderr.write('Could not load data from url!')
         sys.exit(1)
