@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def is_str(data):
-    return 1 if pd.notna(data) and data != "Não há descrição" else 0
+    return 1 if pd.notna(data) and data != 'Não há descrição' else 0
 
 def first_str(data):
     return data.split(';')[0]

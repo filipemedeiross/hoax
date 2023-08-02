@@ -56,18 +56,18 @@ if __name__ == '__main__':
         sys.exit(1)
 
     data = sys.argv[1]
-    train_output = os.path.join(sys.argv[2], "train.pkl")
-    test_output = os.path.join(sys.argv[2], "test.pkl")
+    train_output = os.path.join(sys.argv[2], 'train.pkl')
+    test_output = os.path.join(sys.argv[2], 'test.pkl')
 
     notifications = pd.read_csv(data, low_memory=False, usecols=cols)[cols]
     process_dataframe(notifications)
 
-    X = notifications.drop(["validado"], axis=1).to_numpy()
-    y = notifications["validado"].to_numpy()
+    X = notifications.drop(['validado'], axis=1).to_numpy()
+    y = notifications['validado'].to_numpy()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=split)
 
-    with open(train_output, "wb") as fd:
+    with open(train_output, 'wb') as fd:
         pickle.dump((X_train, y_train), fd)
 
-    with open(test_output, "wb") as fd:
+    with open(test_output, 'wb') as fd:
         pickle.dump((X_test, y_test), fd)
