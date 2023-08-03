@@ -1,3 +1,5 @@
+EVAL_PATH = 'eval'
+
 cols = [
     'institiuicoes_atuando_local', 'iniciados_outras_providencias', 'origem',
     'plano_emergencia_acionado', 'informacao_responsavel', 'ocorrencia_oleo',

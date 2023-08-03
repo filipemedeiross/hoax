@@ -1,7 +1,7 @@
 import os
 import sys
-from constants import cols
 from pandas import read_csv
+from constants import cols
 
 
 def load_data(url, filepath):

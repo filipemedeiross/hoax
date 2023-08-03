@@ -47,16 +47,19 @@ def process_dataframe(dataframe):
 
 
 if __name__ == '__main__':
-    params = yaml.safe_load(open('params.yaml'))['featurize']
-    split = params['split']
-
     if len(sys.argv) != 3:
         sys.stderr.write('Arguments error. Usage:\n')
-        sys.stderr.write('\tpython featurization.py data-dir-path features-dir-path')
+        sys.stderr.write('\tpython featurization.py data-path features-dir-path')
         sys.exit(1)
+
+    params = yaml.safe_load(open('params.yaml'))['featurize']
+    seed = params['seed']
+    split_val = params['split_val']
+    split_test = params['split_test']
 
     data = sys.argv[1]
     train_output = os.path.join(sys.argv[2], 'train.pkl')
+    val_output = os.path.join(sys.argv[2], 'val.pkl')
     test_output = os.path.join(sys.argv[2], 'test.pkl')
 
     notifications = pd.read_csv(data, low_memory=False, usecols=cols)[cols]
@@ -64,10 +67,15 @@ if __name__ == '__main__':
 
     X = notifications.drop(['validado'], axis=1).to_numpy()
     y = notifications['validado'].to_numpy()
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=split)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=split_test, random_state=seed)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=split_val, random_state=seed)
 
     with open(train_output, 'wb') as fd:
         pickle.dump((X_train, y_train), fd)
+
+    with open(val_output, 'wb') as fd:
+        pickle.dump((X_val, y_val), fd)
 
     with open(test_output, 'wb') as fd:
         pickle.dump((X_test, y_test), fd)

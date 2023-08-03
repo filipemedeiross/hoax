@@ -1,0 +1,9 @@
+featurize:
+  seed: 12345
+  split_val: 0.20
+  split_test: 0.30
+train:
+  cv: 5
+  lr: 0.01
+  epochs: 500
+  bs: 1024
