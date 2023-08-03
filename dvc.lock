@@ -1,0 +1,73 @@
+schema: '2.0'
+stages:
+  featurize:
+    cmd: python scripts\featurization.py data\acidenteambiental.csv data\features
+    deps:
+    - path: data/acidenteambiental.csv
+      hash: md5
+      md5: 5791e016234dce302206d15b8f19bed8
+      size: 1854027
+    - path: scripts/featurization.py
+      hash: md5
+      md5: b8b4280a3a852516258cb2753a529e07
+      size: 3645
+    params:
+      params.yaml:
+        featurize.seed: 12345
+        featurize.split_test: 0.3
+        featurize.split_val: 0.2
+    outs:
+    - path: data\features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+  train:
+    cmd: python scripts\train.py data\features models
+    deps:
+    - path: data\features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: scripts\train.py
+      hash: md5
+      md5: e6cea16d6cec838f4d31f2806e87c6a0
+      size: 2764
+    params:
+      params.yaml:
+        train.bs: 1024
+        train.cv: 5
+        train.epochs: 500
+        train.lr: 0.01
+    outs:
+    - path: models\model.pkl
+      hash: md5
+      md5: e475c68522197ca686e1b1004dfbf3a7
+      size: 3295
+  evaluate:
+    cmd: python scripts\evaluate.py data\features models
+    deps:
+    - path: data\features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: models\model.pkl
+      hash: md5
+      md5: e475c68522197ca686e1b1004dfbf3a7
+      size: 3295
+    - path: scripts\evaluate.py
+      hash: md5
+      md5: 3e61317a099e3e235a6ca59e185c0131
+      size: 1585
+    outs:
+    - path: eval\live\metrics.json
+      hash: md5
+      md5: e22f77a06f8ac4c4b3954dbcf02c86bb
+      size: 206
+    - path: eval\live\plots
+      hash: md5
+      md5: d30925a9e818ac37afedb265acb34fca.dir
+      size: 674380
+      nfiles: 4

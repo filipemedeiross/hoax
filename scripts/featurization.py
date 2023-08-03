@@ -57,6 +57,9 @@ if __name__ == '__main__':
     split_val = params['split_val']
     split_test = params['split_test']
 
+    if not os.path.exists(sys.argv[2]):
+        os.makedirs(sys.argv[2])
+    
     data = sys.argv[1]
     train_output = os.path.join(sys.argv[2], 'train.pkl')
     val_output = os.path.join(sys.argv[2], 'val.pkl')

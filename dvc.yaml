@@ -1,0 +1,36 @@
+stages:
+  featurize:
+    cmd: python scripts\featurization.py data\acidenteambiental.csv data\features
+    deps:
+    - data/acidenteambiental.csv
+    - scripts/featurization.py
+    params:
+    - featurize.seed
+    - featurize.split_test
+    - featurize.split_val
+    outs:
+    - data\features
+  train:
+    cmd: python scripts\train.py data\features models
+    deps:
+    - data\features
+    - scripts\train.py
+    params:
+    - train.bs
+    - train.cv
+    - train.epochs
+    - train.lr
+    outs:
+    - models\model.pkl
+  evaluate:
+    cmd: python scripts\evaluate.py data\features models
+    deps:
+    - data\features
+    - models\model.pkl
+    - scripts\evaluate.py
+    outs:
+    - eval\live\plots:
+        cache: false
+    metrics:
+    - eval\live\metrics.json:
+        cache: false
