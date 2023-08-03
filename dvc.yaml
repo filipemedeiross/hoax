@@ -28,9 +28,21 @@ stages:
     - data\features
     - models\model.pkl
     - scripts\evaluate.py
-    outs:
-    - eval\live\plots:
-        cache: true
+    plots:
+    - eval\live\plots\sklearn\roc:
+        template: simple
+        x: fpr
+        y: tpr
+        title: Receiver operating characteristic (ROC)
+        x_label: False Positive Rate
+        y_label: True Positive Rate
+    - eval\live\plots\sklearn\cm:
+        template: confusion
+        x: actual
+        y: predicted
+        title: Confusion Matrix
+        x_label: True Label
+        y_label: Predicted Label
     metrics:
     - eval\live\metrics.json:
         cache: false

@@ -66,8 +66,13 @@ stages:
       hash: md5
       md5: e22f77a06f8ac4c4b3954dbcf02c86bb
       size: 206
-    - path: eval\live\plots
+    - path: eval\live\plots\sklearn\cm
       hash: md5
-      md5: d30925a9e818ac37afedb265acb34fca.dir
-      size: 674380
-      nfiles: 4
+      md5: f6b8e65934ae2e178771d9dc3c71fdf4.dir
+      size: 670420
+      nfiles: 2
+    - path: eval\live\plots\sklearn\roc
+      hash: md5
+      md5: 944893ffa74b1d0df458884faa964efe.dir
+      size: 3960
+      nfiles: 2
