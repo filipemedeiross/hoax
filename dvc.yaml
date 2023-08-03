@@ -30,7 +30,7 @@ stages:
     - scripts\evaluate.py
     outs:
     - eval\live\plots:
-        cache: false
+        cache: true
     metrics:
     - eval\live\metrics.json:
         cache: false
