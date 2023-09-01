@@ -22,57 +22,66 @@ stages:
       md5: 471001f3c764e2caf622d72353fef64f.dir
       size: 1247866
       nfiles: 3
-  train:
-    cmd: python scripts\train.py data\features models
+  train_tree:
+    cmd: python scripts\train_tree.py data\features models
     deps:
     - path: data\features
       hash: md5
       md5: 471001f3c764e2caf622d72353fef64f.dir
       size: 1247866
       nfiles: 3
-    - path: scripts\train.py
+    - path: scripts\train_tree.py
       hash: md5
-      md5: e6cea16d6cec838f4d31f2806e87c6a0
-      size: 2764
+      md5: 3396eb490c3ed86e6946a5788164be44
+      size: 1161
     params:
       params.yaml:
-        train.bs: 1024
-        train.cv: 5
-        train.epochs: 500
-        train.lr: 0.01
+        train_tree.cv: 5
     outs:
-    - path: models\model.pkl
+    - path: models\clf_tree.pkl
       hash: md5
-      md5: e475c68522197ca686e1b1004dfbf3a7
-      size: 3295
-  evaluate:
-    cmd: python scripts\evaluate.py data\features models
+      md5: 50eedae8012ad533981d52e24b4eec8d
+      size: 2815
+  train_svm:
+    cmd: python scripts\train_svm.py data\features models
     deps:
     - path: data\features
       hash: md5
       md5: 471001f3c764e2caf622d72353fef64f.dir
       size: 1247866
       nfiles: 3
-    - path: models\model.pkl
+    - path: scripts\train_svm.py
       hash: md5
-      md5: e475c68522197ca686e1b1004dfbf3a7
-      size: 3295
-    - path: scripts\evaluate.py
-      hash: md5
-      md5: 3e61317a099e3e235a6ca59e185c0131
-      size: 1585
+      md5: c1bd2087a302c21cb33d49fae1fc9475
+      size: 824
+    params:
+      params.yaml:
+        train_svm.C: 5
+        train_svm.gamma: 0.1
     outs:
-    - path: eval\live\metrics.json
+    - path: models\clf_svm.pkl
       hash: md5
-      md5: e22f77a06f8ac4c4b3954dbcf02c86bb
-      size: 206
-    - path: eval\live\plots\sklearn\cm
+      md5: 4985fe68cf12d54422d7988bf2daff7b
+      size: 257027
+  train_nn:
+    cmd: python scripts\train_nn.py data\features models
+    deps:
+    - path: data\features
       hash: md5
-      md5: f6b8e65934ae2e178771d9dc3c71fdf4.dir
-      size: 670420
-      nfiles: 2
-    - path: eval\live\plots\sklearn\roc
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: scripts\train_nn.py
       hash: md5
-      md5: 944893ffa74b1d0df458884faa964efe.dir
-      size: 3960
-      nfiles: 2
+      md5: 3a5cb4291ceb2594c3d34e5b64eea6d9
+      size: 1388
+    params:
+      params.yaml:
+        train_nn.bs: 1024
+        train_nn.epochs: 500
+        train_nn.lr: 0.01
+    outs:
+    - path: models\clf_nn.pkl
+      hash: md5
+      md5: 70d6964a93d4f2c5b96ae85cfa362309
+      size: 28146

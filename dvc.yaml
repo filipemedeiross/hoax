@@ -10,39 +10,33 @@ stages:
     - featurize.split_val
     outs:
     - data\features
-  train:
-    cmd: python scripts\train.py data\features models
+  train_tree:
+    cmd: python scripts\train_tree.py data\features models
     deps:
     - data\features
-    - scripts\train.py
+    - scripts\train_tree.py
     params:
-    - train.bs
-    - train.cv
-    - train.epochs
-    - train.lr
+    - train_tree.cv
     outs:
-    - models\model.pkl
-  evaluate:
-    cmd: python scripts\evaluate.py data\features models
+    - models\clf_tree.pkl
+  train_svm:
+    cmd: python scripts\train_svm.py data\features models
     deps:
     - data\features
-    - models\model.pkl
-    - scripts\evaluate.py
-    plots:
-    - eval\live\plots\sklearn\roc:
-        template: simple
-        x: fpr
-        y: tpr
-        title: Receiver operating characteristic (ROC)
-        x_label: False Positive Rate
-        y_label: True Positive Rate
-    - eval\live\plots\sklearn\cm:
-        template: confusion
-        x: actual
-        y: predicted
-        title: Confusion Matrix
-        x_label: True Label
-        y_label: Predicted Label
-    metrics:
-    - eval\live\metrics.json:
-        cache: false
+    - scripts\train_svm.py
+    params:
+    - train_svm.C
+    - train_svm.gamma
+    outs:
+    - models\clf_svm.pkl
+  train_nn:
+    cmd: python scripts\train_nn.py data\features models
+    deps:
+    - data\features
+    - scripts\train_nn.py
+    params:
+    - train_nn.lr
+    - train_nn.epochs
+    - train_nn.bs
+    outs:
+    - models\clf_nn.pkl

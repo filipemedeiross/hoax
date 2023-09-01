@@ -2,8 +2,12 @@ featurize:
   seed: 12345
   split_val: 0.20
   split_test: 0.30
-train:
+train_tree:
   cv: 5
+train_svm:
+  C: 5
+  gamma: 0.1
+train_nn:
   lr: 0.01
   epochs: 500
   bs: 1024
