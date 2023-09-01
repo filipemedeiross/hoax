@@ -40,3 +40,64 @@ stages:
     - train_nn.bs
     outs:
     - models\clf_nn.pkl
+  evaluate_tree:
+    cmd: python scripts/evaluate_tree.py data/features models/clf_tree.pkl
+    deps:
+    - data/features
+    - models/clf_tree.pkl
+    - scripts/evaluate_tree.py
+  evaluate_svm:
+    cmd: python scripts/evaluate_svm.py data/features models/clf_svm.pkl
+    deps:
+    - data/features
+    - models/clf_svm.pkl
+    - scripts/evaluate_svm.py
+  evaluate_nn:
+    cmd: python scripts/evaluate_nn.py data/features models/clf_nn.pkl
+    deps:
+    - data/features
+    - models/clf_nn.pkl
+    - scripts/evaluate_nn.py
+metrics:
+- eval/live_tree/metrics.json
+- eval/live_svm/metrics.json
+- eval/live_nn/metrics.json
+plots:
+- ROC-tree:
+    template: simple
+    x: fpr
+    y:
+      eval/live_tree/plots/sklearn/roc/train.json: tpr
+      eval/live_tree/plots/sklearn/roc/test.json: tpr
+- Confusion-Matrix-tree:
+    template: confusion
+    x: actual
+    y:
+      eval/live_tree/plots/sklearn/cm/train.json: predicted
+      eval/live_tree/plots/sklearn/cm/test.json: predicted
+- Precision-Recall-tree:
+    template: simple
+    x: recall
+    y:
+      eval/live_tree/plots/sklearn/prc/train.json: precision
+      eval/live_tree/plots/sklearn/prc/test.json: precision
+- eval/live_tree/plots/images/features_importance_train.png
+- eval/live_tree/plots/images/features_importance_test.png
+- Confusion-Matrix-svm:
+    template: confusion
+    x: actual
+    y:
+      eval/live_svm/plots/sklearn/cm/train.json: predicted
+      eval/live_svm/plots/sklearn/cm/test.json: predicted
+- ROC-nn:
+    template: simple
+    x: fpr
+    y:
+      eval/live_nn/plots/sklearn/roc/train.json: tpr
+      eval/live_nn/plots/sklearn/roc/test.json: tpr
+- Confusion-Matrix-nn:
+    template: confusion
+    x: actual
+    y:
+      eval/live_nn/plots/sklearn/cm/train.json: predicted
+      eval/live_nn/plots/sklearn/cm/test.json: predicted

@@ -85,3 +85,51 @@ stages:
       hash: md5
       md5: 70d6964a93d4f2c5b96ae85cfa362309
       size: 28146
+  evaluate_tree:
+    cmd: python scripts/evaluate_tree.py data/features models/clf_tree.pkl
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: models/clf_tree.pkl
+      hash: md5
+      md5: 50eedae8012ad533981d52e24b4eec8d
+      size: 2815
+    - path: scripts/evaluate_tree.py
+      hash: md5
+      md5: 69e8e0bae19d5463aa74593ea68a5064
+      size: 2429
+  evaluate_svm:
+    cmd: python scripts/evaluate_svm.py data/features models/clf_svm.pkl
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: models/clf_svm.pkl
+      hash: md5
+      md5: 4985fe68cf12d54422d7988bf2daff7b
+      size: 257027
+    - path: scripts/evaluate_svm.py
+      hash: md5
+      md5: 3d4af78a7105e033741280b08e7d0d65
+      size: 1351
+  evaluate_nn:
+    cmd: python scripts/evaluate_nn.py data/features models/clf_nn.pkl
+    deps:
+    - path: data/features
+      hash: md5
+      md5: 471001f3c764e2caf622d72353fef64f.dir
+      size: 1247866
+      nfiles: 3
+    - path: models/clf_nn.pkl
+      hash: md5
+      md5: 70d6964a93d4f2c5b96ae85cfa362309
+      size: 28146
+    - path: scripts/evaluate_nn.py
+      hash: md5
+      md5: 178847967c1977b08432b18bba18fa57
+      size: 1739
