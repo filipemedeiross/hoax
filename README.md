@@ -53,7 +53,7 @@ At this point, you can verify the pipeline's structure using (it resembles the f
 ```
 
 <p align="center"> 
-    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/dag.png" width="650" height="400">
+    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/dag.png" width="700" height="400">
 </p>
 
 > Pipeline description:
@@ -83,7 +83,7 @@ To begin experimentation, use `dvc exp run --run-all` you will notice that only 
 To list the obtained results, you can use `dvc exp show --only-changed` and will receive a result similar to the following:
 
 <p align="center"> 
-    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/exp_show.png?raw=true" width="650" height="400">
+    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/exp_show.png?raw=true" width="700" height="400">
 </p>
 
 If you only want to execute the pipeline found in `dvc.yaml` with the parameters saved in `params.yaml`:
