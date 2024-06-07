@@ -68,7 +68,7 @@ You can enqueue multiple experiments for later execution with:
 ```
 
 <p align="center"> 
-    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/queuing_experiments.png?raw=true" width="500" height="350">
+    <img src="https://github.com/filipemedeiross/hoax/blob/main/docs/media/queuing_experiments.png?raw=true" width="550" height="350">
 </p>
 
 To begin experimentation, use `dvc exp run --run-all` you will notice that only the changed stages will be executed, and those without modifications will utilize the cached result, as follows:
